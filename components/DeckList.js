@@ -11,8 +11,12 @@ class DeckList extends Component {
     }
     render () {
         return (
-            <View>
-                {this.props.decks && Object.keys(this.props.decks).map(deck => (<DeckCard key={this.props.decks[deck].title} deck={this.props.decks[deck]}/>))}
+            <View style={styles.container}>
+                {this.props.decks && Object.keys(this.props.decks).map(deck => (
+                    <View style={styles.row} key={this.props.decks[deck].title + '_row'}>
+                        <DeckCard key={this.props.decks[deck].title} deck={this.props.decks[deck]}/>
+                    </View>
+                ))}
             </View>
         )
     }
@@ -23,5 +27,24 @@ function mapStateToProps(state){
         decks: state
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 50,
+        flex: 1,
+        alignItems: 'stretch'
+    },
+    row: {
+        height: 100,
+        margin: 10,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        borderWidth: 1,
+        borderColor: '#333333',
+        borderRadius: 5
+    }
+})
 
 export default connect(mapStateToProps)(DeckList)

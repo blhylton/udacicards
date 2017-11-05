@@ -3,8 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+import CardCreate from './components/CardCreate'
 import DeckCreate from './components/DeckCreate'
 import DeckList from './components/DeckList'
+import DeckTitle from './components/DeckTitle'
+import DeckQuiz from './components/DeckQuiz'
 
 export default class App extends React.Component {
   render() {
@@ -12,7 +15,6 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <DeckList />
-          <DeckCreate />
         </View>
       </Provider>
     );
@@ -22,8 +24,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 });
