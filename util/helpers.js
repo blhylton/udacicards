@@ -31,6 +31,6 @@ export function addCardToDeck(title, card){
                     card
                 ]
             }
-            AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(data))
+            AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
         })
 }
