@@ -60,11 +60,12 @@ class CardCreate extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <TextInput
                     onChangeText={(text) => this.setState({question: {text, error: {status: false, text: ''}}})}
                     value={this.state.question.text}
                     placeholder="Question"
+                    style={styles.input}
                 />
                 {this.state.question.error.status && (
                     <Text>{this.state.question.error.text}</Text>
@@ -73,16 +74,43 @@ class CardCreate extends Component {
                     onChangeText={(text) => this.setState({answer: {text, error: {status: false, text: ''}}})}
                     value={this.state.answer.text}
                     placeholder="Answer"
+                    style={styles.input}
                 />
                 {this.state.answer.error.status && (
                     <Text>{this.state.answer.error.text}</Text>
                 )}
-                <TouchableOpacity onPress={this.submit}>
-                    <Text>Submit</Text>
+                <TouchableOpacity onPress={this.submit} style={styles.submitBtn}>
+                    <Text style={styles.submitBtnText}>Submit</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#333',
+        borderRadius: 5,
+        padding: 10,
+        alignSelf: 'stretch',
+        margin: 15
+    },
+    submitBtn: {
+        backgroundColor: '#333',
+        borderRadius: 5,
+        padding: 10,
+        paddingLeft: 40,
+        paddingRight: 40
+    },
+    submitBtnText: {
+        color: '#fff'
+    }
+})
 
 export default connect()(CardCreate)
