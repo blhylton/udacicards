@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { receiveDecks } from '../actions'
 import { getDecks, clearData } from '../util/helpers'
+import DeckCard from './DeckCard'
 
 class DeckList extends Component {
     componentDidMount = () => {
@@ -11,7 +12,7 @@ class DeckList extends Component {
     render () {
         return (
             <View>
-                <Text>{JSON.stringify(this.props.decks)}</Text>
+                {this.props.decks && Object.keys(this.props.decks).map(deck => (<DeckCard key={this.props.decks[deck].title} deck={this.props.decks[deck]}/>))}
             </View>
         )
     }
