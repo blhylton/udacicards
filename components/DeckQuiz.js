@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 import QuizQuestion from './QuizQuestion'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 export default class DeckQuiz extends Component {
     constructor(props){
@@ -18,15 +19,27 @@ export default class DeckQuiz extends Component {
         return (
             <View style={styles.container}>
                 {idx < questions.length ? (    
-                    <View style={{flex: 1}}>
+                    <View style={{flex: 1, alignSelf: 'stretch'}}>
                         <Text style={styles.counter}>{idx + 1}/{questions.length}</Text>
                         <QuizQuestion question={questions[idx]} showAnswer={showAnswer} flipCard={this.flipCard} style={{flex: 4}} />
                         <View style={{flex: 2}}>
                             <TouchableOpacity onPress={() => this.setState({idx: idx + 1, score: score + 1})} style={[styles.btn, styles.correctBtn]}>
-                                <Text style={styles.btnText}>Correct</Text>
+                                <Text style={styles.btnText}>
+                                    {
+                                        Platform.OS === 'iOS'
+                                        ? (<Ionicons name="ios-checkmark-circle-outline" style={styles.btnIcon} />) 
+                                        : (<Ionicons name="md-checkmark-circle-outline" style={styles.btnIcon} />)
+                                    } Correct
+                                </Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this.setState({idx: idx + 1})} style={[styles.btn, styles.incorrectBtn]}>
-                                <Text style={styles.btnText}>Incorrect</Text>
+                                <Text style={styles.btnText}>
+                                    {
+                                        Platform.OS === 'iOS'
+                                        ? (<Ionicons name="ios-close-circle-outline" style={styles.btnIcon} />) 
+                                        : (<MaterialCommunityIcons name="close-circle-outline" style={styles.btnIcon} />)
+                                    } Incorrect
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -37,10 +50,22 @@ export default class DeckQuiz extends Component {
                         </View>
                         <View style={{flex: 1}}>
                             <TouchableOpacity onPress={() => this.setState({idx: 0, score: 0})} style={[styles.btn, styles.genericBtn]}>
-                                <Text style={styles.btnText}>Try Again</Text>
+                                <Text style={styles.btnText}>
+                                    {
+                                        Platform.OS === 'iOS'
+                                        ? (<Ionicons name="ios-refresh" style={styles.btnIcon} />) 
+                                        : (<Ionicons name="md-refresh" style={styles.btnIcon} />)
+                                    } Try Again
+                                </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.btn, styles.genericBtn]}>
-                                <Text style={styles.btnText}>Back to List</Text>
+                                <Text style={styles.btnText}>
+                                    {
+                                        Platform.OS === 'iOS'
+                                        ? (<Ionicons name="ios-arrow-back" style={styles.btnIcon} />) 
+                                        : (<Ionicons name="md-arrow-back" style={styles.btnIcon} />)
+                                    } Back to List
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -95,5 +120,9 @@ const styles = StyleSheet.create({
     btnText: {
         color: 'white',
         fontSize: 18
+    },
+    btnIcon: {
+        fontSize: 22,
+        marginRight: 5
     }
 })
