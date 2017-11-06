@@ -13,8 +13,10 @@ yarn install
 yarn start
 ~~~~
 
-That's it! No backend server or depencies that are not handled by `yarn`.
+That's it! No backend server or dependencies that are not handled by `yarn`.
 
 Alternatively, you can likely use `npm` but **this has not been tested** so *caveat emptor*.
+
+## Acknowledgements
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
