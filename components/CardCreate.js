@@ -59,7 +59,7 @@ class CardCreate extends Component {
             }
             if(this.state.question.text === ''){
                 question.error.status = true
-                quesiton.error.text = 'Question can not be empty'
+                question.error.text = 'Question can not be empty'
             }
 
             if(this.state.answer.text === ''){
@@ -84,7 +84,7 @@ class CardCreate extends Component {
                     style={styles.input}
                 />
                 {this.state.question.error.status && (
-                    <Text>{this.state.question.error.text}</Text>
+                    <Text style={styles.errorText}>{this.state.question.error.text}</Text>
                 )}
                 <TextInput
                     onChangeText={(text) => this.setState({answer: {text, error: {status: false, text: ''}}})}
@@ -93,7 +93,7 @@ class CardCreate extends Component {
                     style={styles.input}
                 />
                 {this.state.answer.error.status && (
-                    <Text>{this.state.answer.error.text}</Text>
+                    <Text style={styles.errorText}>{this.state.answer.error.text}</Text>
                 )}
                 <TouchableOpacity onPress={this.submit} style={styles.submitBtn}>
                     <Text style={styles.submitBtnText}>Submit</Text>
@@ -126,6 +126,10 @@ const styles = StyleSheet.create({
     },
     submitBtnText: {
         color: '#fff'
+    },
+    errorText: {
+        color: '#aa0000',
+        marginBottom: 15
     }
 })
 
