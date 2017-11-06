@@ -9,14 +9,35 @@ export default class DeckQuiz extends Component {
         super(props)
         this.state = { score: 0, idx: 0, showAnswer: false }
     }
+
+    static navigationOptions = ({navigation}) => {
+        const {deck} = navigation.state.params
+        return {title: `${deck.title} Review`}
+    }
+
     flipCard = () => {
         this.setState({
             showAnswer: !this.state.showAnswer
         })
     }
+
     render() {
-        const { questions } = this.props.navigation.state.params
+        const { deck, questions } = this.props.navigation.state.params
         const { idx, score, showAnswer } = this.state
+
+        if(questions.length === 0){
+            return (
+                <View style={styles.container}>
+                    <View style={styles.noItems}>
+                    {Platform.OS === 'ios'
+                        ? (<Ionicons name='ios-sad-outline' size={100} color='black' />)
+                        : (<Ionicons name='md-sad' size={100} color='black' />)
+                    }
+                    <Text>You haven't created any cards yet.</Text>
+                    </View>
+                </View>
+            )
+        }
 
         if(idx >= questions.length){
             clearLocalNotifications()
@@ -134,5 +155,21 @@ const styles = StyleSheet.create({
     btnIcon: {
         fontSize: 22,
         marginRight: 5
+    },
+    noItems: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    borderedItem: {
+        borderWidth: 1,
+        borderColor: '#333333',
+        borderRadius: 5
+    },
+    createDeckBtn: {
+        padding: 10,
+        paddingLeft: 45,
+        paddingRight: 45,
+        margin: 15
     }
 })

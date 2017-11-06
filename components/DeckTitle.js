@@ -38,7 +38,7 @@ class DeckTitle extends Component {
                         style={[styles.startBtn, styles.btn]}
                         onPress={() => this.props.navigation.navigate(
                             'DeckQuiz',
-                            { questions }
+                            { deck, questions }
                         )}>
                         <Text style={styles.startBtnText}>Start Quiz</Text>
                     </TouchableOpacity>

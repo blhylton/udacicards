@@ -29,7 +29,12 @@ const Tabs = TabNavigator({
   }
 },{
   navigationOptions: {
-    header: null
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: '#4e4cb8'
+    },
+    title: 'UdaciCard',
+    headerLeft: null
   },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? '#4e4cb8': 'white',
@@ -49,7 +54,10 @@ const Tabs = TabNavigator({
 
 const MainNavigator = StackNavigator({
   Home: {
-    screen: Tabs
+    screen: Tabs,
+    navigationOptions: {
+      headerBackTitle: 'Home'
+    }
   },
   DeckDetail: {
     screen: DeckTitle,
@@ -57,7 +65,7 @@ const MainNavigator = StackNavigator({
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#4e4cb8'
-      },
+      }
     }
   },
   AddCard: {
