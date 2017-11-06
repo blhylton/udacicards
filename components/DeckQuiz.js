@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 import QuizQuestion from './QuizQuestion'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { clearLocalNotifications, setLocalNotification } from '../util/helpers'
 
 export default class DeckQuiz extends Component {
     constructor(props){
@@ -16,6 +17,11 @@ export default class DeckQuiz extends Component {
     render() {
         const { questions } = this.props.navigation.state.params
         const { idx, score, showAnswer } = this.state
+
+        if(idx >= questions.length){
+            clearLocalNotifications()
+                .then(setLocalNotification)
+        }
         return (
             <View style={styles.container}>
                 {idx < questions.length ? (    

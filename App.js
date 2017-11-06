@@ -11,6 +11,7 @@ import DeckQuiz from './components/DeckQuiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
+import { setLocalNotification } from './util/helpers'
 
 const Tabs = TabNavigator({
   Decks: {
@@ -88,6 +89,9 @@ function UdaciStatusBar({backgroundColor, ...props}){
 }
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>
