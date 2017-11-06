@@ -6,8 +6,24 @@ import { addCard } from '../actions'
 
 class CardCreate extends Component {
     constructor(props) {
-        super(props);
-        this.state = { question: {text: '', error: { status: false, text: ''}}, answer: {text: '', error: {state: false, text: ''}} };
+        super(props)
+        this.state = {
+            deck: this.props.navigation.state.params.deck.title,
+            question: {
+                text: '', error: {
+                    status: false, text: ''
+                }
+            }, answer: {
+                text: '', error: {
+                    state: false, text: ''
+                }
+            }
+        };
+    }
+
+    static navigationOptions = ({navigation}) => {
+        const {deck} = navigation.state.params
+        return {title: `New Card in ${deck.title}`}
     }
 
     submit = () => {
@@ -17,8 +33,8 @@ class CardCreate extends Component {
                     question: this.state.question.text,
                     answer: this.state.answer.text
                 }
-            addCardToDeck( this.props.deck, payload)
-                .then(this.props.dispatch(addCard(this.props.deck, payload)))
+            addCardToDeck( this.state.deck, payload)
+                .then(this.props.dispatch(addCard(this.state.deck, payload)))
                 .then(this.setState(
                     {
                         question: { text: '', error: {status: false, text: ''}},

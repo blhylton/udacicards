@@ -14,6 +14,10 @@ class DeckCreate extends Component {
             saveDeckTitle(this.state.text)
                 .then(this.props.dispatch(addDeck(this.state.text)))
                 .then(this.setState({text: '', error: { status: false, text: ''}}))
+                .then(this.props.navigation.navigate(
+                    'DeckDetail',
+                    { deck: this.state.text }
+                ))
         }else{
             this.setState({error: {status: true, text: 'Title can not be empty'}})
         }

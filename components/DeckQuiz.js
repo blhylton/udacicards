@@ -14,7 +14,7 @@ export default class DeckQuiz extends Component {
         })
     }
     render() {
-        const { questions } = this.props
+        const { questions } = this.props.navigation.state.params
         const { idx, score, showAnswer } = this.state
         return (
             <View style={styles.container}>
@@ -58,7 +58,12 @@ export default class DeckQuiz extends Component {
                                     } Try Again
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.btn, styles.genericBtn]}>
+                            <TouchableOpacity 
+                                style={[styles.btn, styles.genericBtn]}
+                                onPress={() => this.props.navigation.navigate(
+                                    'Home'
+                                )}
+                            >
                                 <Text style={styles.btnText}>
                                     {
                                         Platform.OS === 'iOS'
@@ -80,7 +85,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 50,
         alignSelf: 'stretch',
         padding: 20
     },

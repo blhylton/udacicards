@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { getDeck } from '../util/helpers'
+import { connect } from 'react-redux'
 
-export default class DeckTitle extends Component {
+
+class DeckTitle extends Component {
     constructor(props){
         super(props)
         this.state = {deck: {questions: []}}
     }
 
-    componentDidMount = () => {
-        getDeck(this.props.deck).then(deck => this.setState(
-            {
-                deck
-            }
-        ))
+    static navigationOptions = ({navigation}) => {
+        const {deck} = navigation.state.params
+        return {title: `${deck} Card Deck`}
     }
+
+    
     render() {
-        const {deck} = this.state
+        const deck = this.props.decks[this.props.navigation.state.params.deck]
+        const {questions} = deck
         return (
             <View style={styles.container}>
                 <View style={styles.textWrapper}>
@@ -24,10 +26,20 @@ export default class DeckTitle extends Component {
                     <Text style={styles.count}>{deck.questions.length} Card(s)</Text>
                 </View>
                 <View style={styles.btnWrapper}>
-                    <TouchableOpacity style={[styles.addBtn, styles.btn]}>
+                    <TouchableOpacity
+                        style={[styles.addBtn, styles.btn]}
+                        onPress={() => this.props.navigation.navigate(
+                            'AddCard',
+                            { deck }
+                        )}>
                         <Text style={styles.addBtnText}>Add Card</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.startBtn, styles.btn]}>
+                    <TouchableOpacity
+                        style={[styles.startBtn, styles.btn]}
+                        onPress={() => this.props.navigation.navigate(
+                            'DeckQuiz',
+                            { questions }
+                        )}>
                         <Text style={styles.startBtnText}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
@@ -35,6 +47,15 @@ export default class DeckTitle extends Component {
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        decks: state,
+        ...ownProps
+    }
+}
+
+export default connect(mapStateToProps)(DeckTitle)
 
 const styles = StyleSheet.create({
     container: {
