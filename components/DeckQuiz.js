@@ -88,7 +88,7 @@ export default class DeckQuiz extends Component {
                             <TouchableOpacity 
                                 style={[styles.btn, styles.genericBtn]}
                                 onPress={() => this.props.navigation.navigate(
-                                    'Home'
+                                    'DeckDetail', { deck: deck.title }
                                 )}
                             >
                                 <Text style={styles.btnText}>
@@ -96,7 +96,7 @@ export default class DeckQuiz extends Component {
                                         Platform.OS === 'iOS'
                                         ? (<Ionicons name="ios-arrow-back" style={styles.btnIcon} />) 
                                         : (<Ionicons name="md-arrow-back" style={styles.btnIcon} />)
-                                    } Back to List
+                                    } Back to Deck
                                 </Text>
                             </TouchableOpacity>
                         </View>
