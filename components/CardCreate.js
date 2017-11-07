@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { addCardToDeck } from '../util/helpers'
 import { addCard } from '../actions'
@@ -27,6 +27,7 @@ class CardCreate extends Component {
     }
 
     submit = () => {
+        Keyboard.dismiss()
         if(this.state.question.text !== '' && this.state.answer.text !== ''){
             const payload =
                 {

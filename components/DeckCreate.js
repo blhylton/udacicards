@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, TextInput, Keyboard } from 'react-native'
 import { saveDeckTitle } from '../util/helpers'
 import { addDeck } from '../actions'
 import { connect } from 'react-redux'
@@ -10,6 +10,7 @@ class DeckCreate extends Component {
         this.state = { text: '', error: { status: false, text: ''} };
     }
     submit = () => {
+        Keyboard.dismiss()
         if(this.state.text !== ''){
             saveDeckTitle(this.state.text)
                 .then(this.props.dispatch(addDeck(this.state.text)))
