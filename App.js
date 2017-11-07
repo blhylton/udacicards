@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
+import { StyleSheet, Text, KeyboardAvoidingView, View, Platform, StatusBar } from 'react-native';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
@@ -103,10 +103,10 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
           <UdaciStatusBar backgroundColor={'#4e4cb8'} barStyle='light-content' />
           <MainNavigator />
-        </View>
+        </KeyboardAvoidingView>
       </Provider>
     );
   }
