@@ -41,6 +41,7 @@ class CardCreate extends Component {
                         answer: { text: '', error: {state: false, text: ''}}
                     }
                 ))
+                .then(this.props.navigation.navigate('DeckDetail', {deck : this.state.deck}))
         }else{
             let question = {
                 text: this.state.question.text,
