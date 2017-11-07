@@ -19,4 +19,4 @@ Alternatively, you can likely use `npm` but **this has not been tested** so *cav
 
 ## Acknowledgements
 
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
+This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app), and utilizes [Expo](https://expo.io/).
